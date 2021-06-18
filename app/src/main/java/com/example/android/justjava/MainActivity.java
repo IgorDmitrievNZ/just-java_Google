@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 "\nAdd Fucking cream?: " + hasWhippedCream +
                 "\nAdd The Chocolate?: " + hasChocolate +
                 "\nQuantity: " + quantity +
-                "\nTotal: $" + price + "\nThank you!";
+                "\nTotal: $" + price + "\n"+getString(R.string.thank_you);
 
     }
 
