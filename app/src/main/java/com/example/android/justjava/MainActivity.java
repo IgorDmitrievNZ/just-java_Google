@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
      EditText eText;
 
 
+
     /*
      * Life cycle
      */
@@ -43,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
          orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view);
          vsbitieCreamCheckBox = (CheckBox) findViewById(R.id.cream_checkbox);
          chocolateCheckBox = findViewById(R.id.chocolate_checkbox);
-        eText =  findViewById(R.id.album_description_view);
+         eText =  findViewById(R.id.album_description_view);
+
     }
 
 
@@ -51,12 +53,20 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-            displayMessage(createOrderSummary(5));
-            composeEmail(["idmitrievnz@gmail.com"],"");
+//            displayMessage(createOrderSummary(5));
+        String nameClient = eText.getText().toString();
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+        intent.putExtra(Intent.EXTRA_EMAIL,"idmitrievnz@gmail.com");
+        intent.putExtra(Intent.EXTRA_SUBJECT,"Just Java order for: "+ nameClient);
+        intent.putExtra(Intent.EXTRA_TEXT,createOrderSummary(5) );
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 
 
-    private String createOrderSummary(int price){
+    private   String createOrderSummary(int price){
         boolean hasWhippedCream = vsbitieCreamCheckBox.isChecked();
         boolean hasChocolate = chocolateCheckBox.isChecked();
         String nameClient = eText.getText().toString();
@@ -73,17 +83,11 @@ public class MainActivity extends AppCompatActivity {
                 "\nAdd The Chocolate?: " + hasChocolate +
                 "\nQuantity: " + quantity +
                 "\nTotal: $" + price + "\nThank you!";
+
     }
 
-    public void composeEmail(String[] addresses, String subject) {
-        Intent intent = new Intent(Intent.ACTION_SENDTO);
-        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
-        intent.putExtra(Intent.EXTRA_EMAIL, addresses);
-        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivity(intent);
-        }
-    }
+
+
 
 
     /**
@@ -127,10 +131,10 @@ public class MainActivity extends AppCompatActivity {
         quantityTextView.setText("" + number);
     }
 
-    /**
-     * This method displays the given text on the screen.
-     */
-    private void displayMessage(String message) {
-        orderSummaryTextView.setText(message);
-    }
+//    /**
+//     * This method displays the given text on the screen.
+//     */
+//    private void displayMessage(String message) {
+//        orderSummaryTextView.setText(message);
+//    }
 }
