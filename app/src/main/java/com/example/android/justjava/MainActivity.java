@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
      TextView quantityTextView ;
      TextView orderSummaryTextView;
-     CheckBox vsbitieCreamCheckBox;
+     CheckBox CreamCheckBox;
      CheckBox chocolateCheckBox;
      EditText eText;
 
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
          quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
          orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view);
-         vsbitieCreamCheckBox = (CheckBox) findViewById(R.id.cream_checkbox);
+         CreamCheckBox = (CheckBox) findViewById(R.id.cream_checkbox);
          chocolateCheckBox = findViewById(R.id.chocolate_checkbox);
          eText =  findViewById(R.id.album_description_view);
 
@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-//            displayMessage(createOrderSummary(5));
         String nameClient = eText.getText().toString();
         Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setData(Uri.parse("mailto:")); // only email apps should handle this
@@ -63,11 +62,12 @@ public class MainActivity extends AppCompatActivity {
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }
+
     }
 
 
     private   String createOrderSummary(int price){
-        boolean hasWhippedCream = vsbitieCreamCheckBox.isChecked();
+        boolean hasWhippedCream = CreamCheckBox.isChecked();
         boolean hasChocolate = chocolateCheckBox.isChecked();
         String nameClient = eText.getText().toString();
         if (hasChocolate){
@@ -78,13 +78,9 @@ public class MainActivity extends AppCompatActivity {
         }
         price = quantity * price;
 //        Log.i("igor", "kpem: " + hasWhippedCream);
-        return  "Name: " + nameClient +
-                "\nAdd Fucking cream?: " + hasWhippedCream +
-                "\nAdd The Chocolate?: " + hasChocolate +
-                "\nQuantity: " + quantity +
-                "\nTotal: $" + price + "\n"+getString(R.string.thank_you);
-
+        return getString(R.string.create_order_summary, nameClient, hasWhippedCream, hasChocolate, quantity, price);
     }
+
 
 
 
@@ -131,10 +127,4 @@ public class MainActivity extends AppCompatActivity {
         quantityTextView.setText("" + number);
     }
 
-//    /**
-//     * This method displays the given text on the screen.
-//     */
-//    private void displayMessage(String message) {
-//        orderSummaryTextView.setText(message);
-//    }
 }

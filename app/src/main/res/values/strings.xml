@@ -4,7 +4,6 @@
 <!--Header text for the list of toppings [CHAR LIMIT=20]    -->
     <string name="toppings">Toppings</string>
 
-    <!--Header text for the list of toppings [CHAR LIMIT=20]    -->
     <string name="chocolate">Chocolate</string>
 
     <string name="add_your_name">Add your name, please!</string>
@@ -19,6 +18,15 @@
 
     <string name="price">$ 0</string>
 
-    <string name="thank_you">Thank you!</string>
+<!--Localization java code  -->
+    <string name="create_order_summary">
+        Name : %s \n
+        Add Whipped Cream?: %b \n
+        Add The Chocolate?: %b \n
+        Quantity: %d \n
+        Total: $ %d \n
+        Thank you!
+    </string>
+
 
 </resources>

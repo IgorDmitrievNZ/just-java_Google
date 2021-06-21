@@ -9,5 +9,15 @@
     <string name="order_summary">итог заказа</string>
     <string name="order">заказ</string>
     <string name="price">₽ 0</string>
-    <string name="thank_you">Спасибо!</string>
+
+
+    <string name="create_order_summary">
+        Имя: %s \n
+        Добавить взбитые сливки?:  %b \n
+        Добавить шоколад? : %b \n
+        Количество:  %d \n
+        Итого: ₽ %d \n
+        Спасибо!
+    </string>
+
 </resources>
