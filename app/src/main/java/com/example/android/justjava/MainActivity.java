@@ -1,6 +1,5 @@
 package com.example.android.justjava;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,19 +19,17 @@ public class MainActivity extends AppCompatActivity {
 
     int quantity = 1;
 
-    /*
+    /**
      * Views
      */
 
-     TextView quantityTextView ;
-     TextView orderSummaryTextView;
-     CheckBox CreamCheckBox;
-     CheckBox chocolateCheckBox;
-     EditText eText;
+    TextView quantityTextView;
+    CheckBox CreamCheckBox;
+    CheckBox chocolateCheckBox;
+    EditText eText;
 
 
-
-    /*
+    /**
      * Life cycle
      */
 
@@ -40,11 +37,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-         quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
-         orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view);
-         CreamCheckBox = (CheckBox) findViewById(R.id.cream_checkbox);
-         chocolateCheckBox = findViewById(R.id.chocolate_checkbox);
-         eText =  findViewById(R.id.album_description_view);
+        quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
+        CreamCheckBox = (CheckBox) findViewById(R.id.cream_checkbox);
+        chocolateCheckBox = findViewById(R.id.chocolate_checkbox);
+        eText = findViewById(R.id.album_description_view);
 
     }
 
@@ -56,75 +52,61 @@ public class MainActivity extends AppCompatActivity {
         String nameClient = eText.getText().toString();
         Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setData(Uri.parse("mailto:")); // only email apps should handle this
-        intent.putExtra(Intent.EXTRA_EMAIL,"idmitrievnz@gmail.com");
-        intent.putExtra(Intent.EXTRA_SUBJECT,"Just Java order for: "+ nameClient);
-        intent.putExtra(Intent.EXTRA_TEXT,createOrderSummary(5) );
+        intent.putExtra(Intent.EXTRA_EMAIL, "idmitrievnz@gmail.com");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Just Java order for: " + nameClient);
+        intent.putExtra(Intent.EXTRA_TEXT, createOrderSummary(5, nameClient));
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }
-
     }
 
+    /**
+     *This method sent massage to email
+     */
 
-    private   String createOrderSummary(int price){
+    private String createOrderSummary(int price, String nameClient) {
         boolean hasWhippedCream = CreamCheckBox.isChecked();
         boolean hasChocolate = chocolateCheckBox.isChecked();
-        String nameClient = eText.getText().toString();
-        if (hasChocolate){
-            price = price + 2 ;
+        if (hasChocolate) {
+            price = price + 2;
         }
-        if(hasWhippedCream){
+        if (hasWhippedCream) {
             price = price + 1;
         }
         price = quantity * price;
-//        Log.i("igor", "kpem: " + hasWhippedCream);
+//        Log.i("igor", "cream: " + hasWhippedCream);
         return getString(R.string.create_order_summary, nameClient, hasWhippedCream, hasChocolate, quantity, price);
     }
 
 
-
-
-
-
     /**
-     * eto ya sdelal pribavlenie knopka
+     * This is increment button
      */
     public void increment(View view) {
 
-        if (quantity >= 10){
-            Toast.makeText(this,"You cannot order more than 10 cups ",Toast.LENGTH_SHORT).show();
+        if (quantity >= 10) {
+            Toast.makeText(this, getString(R.string.toast_increment), Toast.LENGTH_SHORT).show();
         } else {
-            quantity = quantity + 1;
-            displayQuantity(quantity);
+            quantity++;
+            quantityTextView.setText("" + quantity);
         }
 
-}
+    }
 
     /**
-     * eto ubalenie knopka
+     * This is decrement button
      */
     public void decrement(View view) {
-        if (quantity <= 1){
-            Toast.makeText(this,"You cannot order less than 1 cup ",Toast.LENGTH_SHORT).show();
+        if (quantity <= 1) {
+            Toast.makeText(this, getString(R.string.toast_decrement), Toast.LENGTH_SHORT).show();
         } else {
-            quantity = quantity - 1;
-            displayQuantity(quantity);
+            quantity--;
+            quantityTextView.setText("" + quantity);
+
         }
 
     }
 
-    /**
-     * This method displays the given quantity value on the screen.
-     */
-    public void displayQuantity(int number ) {
 
-
-        if (quantity>10){
-            Context context = getApplicationContext();
-            Toast toast = Toast.makeText(context,"You cannot order more than ".concat("10cups"),Toast.LENGTH_LONG);
-            toast.show();
-        }
-        quantityTextView.setText("" + number);
-    }
 
 }

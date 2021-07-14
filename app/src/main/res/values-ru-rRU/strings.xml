@@ -6,7 +6,6 @@
     <string name="add_your_name">Добавьте свое имя, пожалуйста!</string>
     <string name="whipped_cream">Взбитые сливки</string>
     <string name="quantity">количество</string>
-    <string name="order_summary">итог заказа</string>
     <string name="order">заказ</string>
     <string name="price">₽ 0</string>
 
@@ -18,6 +17,14 @@
         Количество:  %d \n
         Итого: ₽ %d \n
         Спасибо!
+    </string>
+
+    <string name="toast_increment">
+    Вы не можете заказать более 10 чашек
+    </string>
+
+    <string name="toast_decrement">
+    Вы не можете заказать меньше 1 чашки
     </string>
 
 </resources>

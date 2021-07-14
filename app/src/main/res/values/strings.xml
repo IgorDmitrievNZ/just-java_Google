@@ -12,8 +12,6 @@
 
     <string name="quantity">quantity</string>
 
-    <string name="order_summary">order summary</string>
-
     <string name="order">order</string>
 
     <string name="price">$ 0</string>
@@ -28,5 +26,12 @@
         Thank you!
     </string>
 
+    <string name="toast_increment">
+    You cannot order more than 10 cups
+    </string>
+
+    <string name="toast_decrement">
+    YYou cannot order less than 1 cup
+    </string>
 
 </resources>
